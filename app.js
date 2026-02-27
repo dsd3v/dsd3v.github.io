@@ -66,7 +66,7 @@ class Navbar {
         event.preventDefault()
         const toggle = document.getElementById('navbar-toggle')
         const navbarLinksDiv = document.getElementById('navbar-links-div')
-        console.log(event.srcElement.offsetParent.classList)
+
         if (event.srcElement.offsetParent.classList.contains('active-navbar-toggle')) {
             toggle.classList.remove('active-navbar-toggle')
             navbarLinksDiv.classList.remove('navbar-links-menu-open')
