@@ -1,12 +1,17 @@
 export class PageNotFound {
-    constructor() { }
-
     render() {
-        document.body.innerHTML += `
-        <div className='page-container' id='page-not-found'>
-            <div style='font-size: 3rem; margin-top: 200px'>Page not found.</div>
-            <div style='font-size: 1.5rem; margin-top: 45px'>Invalid URL entered.</div>
-        </div>
-        `
+        const pageNotFoundContainer = document.createElement('section')
+        pageNotFoundContainer.className = 'page-container', pageNotFoundContainer.id = 'page-not-found'
+
+        const pageNotFoundDiv = document.createElement('div')
+        pageNotFoundDiv.appendChild(document.createTextNode('Page not found.'))
+
+        const invalidUrlSpan = document.createElement('span')
+        invalidUrlSpan.appendChild(document.createTextNode('Invalid URL entered.'))
+
+        pageNotFoundContainer.appendChild(pageNotFoundDiv)
+        pageNotFoundContainer.appendChild(invalidUrlSpan)
+
+        document.body.appendChild(pageNotFoundContainer)
     }
 }
