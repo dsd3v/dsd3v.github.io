@@ -1,4 +1,4 @@
-import workExperienceData from '../data/work-experience.json' with {type: 'json'}
+import workExperienceData from '../data/work-experience.json' with { type: 'json' }
 
 export class WorkExperience {
     render() {

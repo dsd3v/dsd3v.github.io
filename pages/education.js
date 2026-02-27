@@ -1,4 +1,4 @@
-import educationData from '../data/education.json' with {type: 'json'}
+import educationData from '../data/education.json' with { type: 'json' }
 
 export class Education {
     render() {

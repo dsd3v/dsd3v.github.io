@@ -1,4 +1,4 @@
-import projectsData from '../data/projects.json' with {type: 'json'}
+import projectsData from '../data/projects.json' with { type: 'json' }
 
 export class Projects {
     render() {
