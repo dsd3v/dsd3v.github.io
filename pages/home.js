@@ -25,7 +25,7 @@ export class Home {
         h1.appendChild(document.createTextNode('David Sordia'))
 
         const h2 = document.createElement('h2')
-        h2.appendChild(document.createTextNode('AI Software Engineer-In-Training'))
+        h2.appendChild(document.createTextNode('AI Software Engineer-in-Training'))
 
         const homeNavigationDiv = document.createElement('div')
         homeNavigationDiv.id = 'home-navigation-div'
