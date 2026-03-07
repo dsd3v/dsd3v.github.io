@@ -97,7 +97,7 @@ h2 {
     position: fixed;
     text-decoration: none;
     top: 0;
-    transform: translateY(13px);
+    transform: translateY(14px);
     width: 100px;
 }
 
@@ -145,7 +145,7 @@ nav {
     align-items: center;
     background-color: rgb(241, 241, 241);
     display: flex;
-    min-height: 62px;
+    min-height: 64px;
     justify-content: center;
     position: fixed;
     top: 0;
@@ -202,7 +202,7 @@ nav {
     }
 }
 
-#page-not-found {
+#page-not-found-container {
     & div {
         font-size: 3rem;
         margin-top: 200px;
@@ -239,7 +239,7 @@ nav {
     position: fixed;
     right: 0;
     top: 0;
-    transform: translateY(16px);
+    transform: translateY(17px);
 
     & #hamburger {
         display: flex;

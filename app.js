@@ -6,59 +6,70 @@ import { PageNotFound } from './pages/page-not-found.js'
 import { Projects } from './pages/projects.js'
 
 export const routesToPages = {
-    '/': { page: Home, title: 'Home' },
-    '/projects': { page: Projects, title: 'Projects' },
-    '/work-experience': { page: WorkExperience, title: 'Work Experience' },
-    '/education': { page: Education, title: 'Education' },
-    '/contact': { page: Contact, title: 'Contact' }
+    '/': { id: 'home', page: Home, title: 'Home' },
+    '/projects': { id: 'projects', page: Projects, title: 'Projects' },
+    '/work-experience': { id: 'work-experience', page: WorkExperience, title: 'Work Experience' },
+    '/education': { id: 'education', page: Education, title: 'Education' },
+    '/contact': { id: 'contact', page: Contact, title: 'Contact' }
 }
 
 window.addEventListener('load', () => {
-    const currentRoute = window.location.pathname.toLowerCase()
-    const currentPage = currentRoute in routesToPages ? new routesToPages[currentRoute].page() : new PageNotFound()
-    const currentRouteNavbarLink = currentRoute in routesToPages ? currentRoute === '/' ? document.getElementById('home-navbar-link') : document.getElementById(`${currentRoute.slice(1)}-navbar-link`) : null
-    !!currentRouteNavbarLink && currentRouteNavbarLink.classList.add('active-navbar-link')
+    const route = window.location.pathname.toLowerCase()
     new Navbar().render()
-    currentPage.render()
+    let page
+    if (route in routesToPages) {
+        page = routesToPages[route].page
+        document.getElementById(`${routesToPages[route]['id']}-navbar-link`).classList.add('active-navbar-link')
+    } else {
+        page = PageNotFound
+    }
+    new page().render()
 })
 
 window.addEventListener('popstate', event => {
     event.preventDefault()
-    const newRoute = window.location.pathname.toLowerCase()
+
     const prevPageNavbarLink = document.getElementsByClassName('active-navbar-link')[0]
-    const newRouteNavbarLink = newRoute === '/' ? document.getElementById('home-navbar-link') : document.getElementById(`${newRoute.slice(1)}-navbar-link`)
-    const prevRouteSlices = prevPageNavbarLink.href.split('/')
-    const prevRoute = `/${prevRouteSlices[prevRouteSlices.length - 1].toLowerCase()}`
-    const prevPageId = prevRoute === '/' ? 'home-container' : `${prevRoute.slice(1)}-container`
+    if (prevPageNavbarLink) {
+        prevPageNavbarLink.classList.remove('active-navbar-link')
+        const prevRouteArray = prevPageNavbarLink.href.split('/')
+        const prevRoute = `/${prevRouteArray[prevRouteArray.length - 1]}`
+        document.getElementById(`${routesToPages[prevRoute].id}-container`).remove()
+    }
 
-    document.getElementById(prevPageId).remove()
-    prevPageNavbarLink.classList.remove('active-navbar-link')
-    newRouteNavbarLink.classList.add('active-navbar-link')
+    const newRoute = window.location.pathname.toLowerCase()
+    let page
+    if (newRoute in routesToPages) {
+        page = routesToPages[newRoute].page
+        document.getElementById(`${routesToPages[newRoute].id}-navbar-link`).classList.add('active-navbar-link')
+    } else {
+        page = PageNotFound
+    }
 
-    const newPage = new routesToPages[newRoute].page()
-    newPage.render()
+    new page().render()
 })
 
 class Navbar {
     onNavbarLinkClicked = event => {
         event.preventDefault()
+
         const currentRoute = window.location.pathname.toLowerCase()
-        const clickedElementRoute = event.srcElement.attributes['href'].nodeValue
+        const toRoute = event.srcElement.attributes['href'].nodeValue
 
-        if (!(currentRoute === clickedElementRoute)) {
-            const currentRouteNavbarLink = currentRoute in routesToPages ? currentRoute === '/' ? document.getElementById('home-navbar-link') : document.getElementById(`${currentRoute.slice(1)}-navbar-link`) : null
-            const newRouteNavbarLink = clickedElementRoute === '/' ? document.getElementById('home-navbar-link') : document.getElementById(`${clickedElementRoute.slice(1)}-navbar-link`)
-            const currentPageId = !!currentRouteNavbarLink ? currentRoute === '/' ? 'home-container' : `${currentRoute.slice(1)}-container` : 'page-not-found'
-            const newPage = new routesToPages[clickedElementRoute].page()
+        if (!(currentRoute === toRoute)) {
+            if (currentRoute in routesToPages) {
+                document.getElementById(`${routesToPages[currentRoute].id}-navbar-link`).classList.remove('active-navbar-link')
+                document.getElementById(`${routesToPages[currentRoute].id}-container`).remove()
+            } else {
+                document.getElementById('page-not-found-container').remove()
+            }
 
-            !!currentRouteNavbarLink && currentRouteNavbarLink.classList.remove('active-navbar-link')
+            document.getElementById(`${routesToPages[toRoute].id}-navbar-link`).classList.add('active-navbar-link')
             document.getElementById('navbar-toggle').classList.remove('active-navbar-toggle')
             document.getElementById('navbar-links-div').classList.remove('navbar-links-menu-open')
-            document.getElementById(currentPageId).remove()
 
-            newRouteNavbarLink.classList.add('active-navbar-link')
-            window.history.pushState({}, '', clickedElementRoute)
-            newPage.render()
+            window.history.pushState({}, '', toRoute)
+            new routesToPages[toRoute].page().render()
         }
     }
 
@@ -88,9 +99,9 @@ class Navbar {
 
         const navbarLinksDiv = document.createElement('div')
         navbarLinksDiv.id = 'navbar-links-div'
-        Object.entries(routesToPages).slice(1).forEach(([route, { title }]) => {
+        Object.entries(routesToPages).slice(1).forEach(([route, { id, title }]) => {
             const navbarLink = document.createElement('a')
-            navbarLink.classList.add('navbar-link'), navbarLink.href = route, navbarLink.id = `${route.slice(1)}-navbar-link`
+            navbarLink.classList.add('navbar-link'), navbarLink.href = route, navbarLink.id = `${id}-navbar-link`
             if (currentRoute === route) navbarLink.classList.add('active-navbar-link')
             navbarLink.appendChild(document.createTextNode(title))
             navbarLink.addEventListener('click', this.onNavbarLinkClicked)

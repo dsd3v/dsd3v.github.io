@@ -3,18 +3,16 @@ import { routesToPages } from '../app.js'
 export class Home {
     onHomeNavigationLinkClicked = event => {
         event.preventDefault()
-        const clickedElementRoute = event.srcElement.attributes['href'].nodeValue
-        const homeNavbarLink = document.getElementById('home-navbar-link')
-        const newRouteNavbarLink = document.getElementById(`${clickedElementRoute.slice(1)}-navbar-link`)
-        const newPage = new routesToPages[clickedElementRoute].page()
+        const toRoute = event.srcElement.attributes['href'].nodeValue
 
-        homeNavbarLink.classList.remove('active-navbar-link')
+        document.getElementById('home-navbar-link').classList.remove('active-navbar-link')
         document.getElementById('navbar-toggle').classList.remove('active-navbar-toggle')
         document.getElementById('navbar-links-div').classList.remove('navbar-links-menu-open')
         document.getElementById('home-container').remove()
-        newRouteNavbarLink.classList.add('active-navbar-link')
-        window.history.pushState({}, '', clickedElementRoute)
-        newPage.render()
+        document.getElementById(`${routesToPages[toRoute].id}-navbar-link`).classList.add('active-navbar-link')
+
+        window.history.pushState({}, '', toRoute)
+        new routesToPages[toRoute].page().render()
     }
 
     render() {
