@@ -100,14 +100,12 @@ export class Navbar {
         navbarToggle.appendChild(arrow)
         navbarToggle.addEventListener('click', event => {
             event.preventDefault()
-            const toggle = document.getElementById('navbar-toggle')
-            const navbarLinksDiv = document.getElementById('navbar-links-div')
 
-            if (toggle.classList.contains('active-navbar-toggle')) {
-                toggle.classList.remove('active-navbar-toggle')
+            if (navbarToggle.classList.contains('active-navbar-toggle')) {
+                navbarToggle.classList.remove('active-navbar-toggle')
                 navbarLinksDiv.classList.remove('navbar-links-menu-open')
             } else {
-                toggle.classList.add('active-navbar-toggle')
+                navbarToggle.classList.add('active-navbar-toggle')
                 navbarLinksDiv.classList.add('navbar-links-menu-open')
             }
         })
