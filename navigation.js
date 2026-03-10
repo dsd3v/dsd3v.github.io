@@ -59,9 +59,7 @@ export class Navbar {
         const currentRoute = window.location.pathname.toLowerCase()
         const toRoute = event.srcElement.attributes['href'].nodeValue
 
-        if (!(currentRoute === toRoute)) {
-            navigate({ toRoute })
-        }
+        if (currentRoute !== toRoute) navigate({ toRoute })
     }
 
     onMenuToggleClicked = event => {
