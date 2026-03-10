@@ -47,7 +47,7 @@ export const useNavigation = () => {
 
     const navigate = ({ isFromPopState = false, isFromUrl = false, toRoute }) => {
         removePreviousPage()
-        renderNewPage({ newPageRoute: getCleanedRoutePath({ toRoute }), shouldUpdateUrl: (!isFromPopState && !isFromUrl) })
+        renderNewPage({ newPageRoute: getCleanedRoutePath({ routePath: toRoute }), shouldUpdateUrl: (!isFromPopState && !isFromUrl) })
     }
 
     const renderNavbar = () => {
