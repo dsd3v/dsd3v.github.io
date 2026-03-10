@@ -41,7 +41,11 @@ export const useNavigation = () => {
 
     const getCleanedRoutePath = ({ routePath }) => {
         let cleanedRoutePath = routePath
-        if (routePath.length > 1 && routePath[routePath.length - 1] == '/') cleanedRoutePath = routePath.slice(routePath(0, routePath.length - 1))
+
+        if (routePath.length > 1 && routePath.endsWith('/')) {
+            cleanedRoutePath = routePath.slice(0, -1)
+        }
+
         return cleanedRoutePath
     }
 
