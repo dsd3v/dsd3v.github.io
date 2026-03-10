@@ -1,11 +1,19 @@
-import { Navbar, navigate } from '/navigation.js'
+import { useNavigation } from '/navigation.js'
 
-window.addEventListener('load', () => {
-    new Navbar().render()
-    navigate({ isFromUrl: true, toRoute: window.location.pathname.toLowerCase() })
-})
+(() => {
+    const initializeApp = () => {
+        const { navigate, renderNavbar } = useNavigation()
 
-window.addEventListener('popstate', event => {
-    event.preventDefault()
-    navigate({ isFromPopState: true, toRoute: window.location.pathname.toLowerCase() })
-})
+        document.addEventListener('DOMContentLoaded', () => {
+            renderNavbar()
+            navigate({ isFromUrl: true, toRoute: window.location.pathname })
+        })
+
+        window.addEventListener('popstate', event => {
+            event.preventDefault()
+            navigate({ isFromPopState: true, toRoute: window.location.pathname })
+        })
+    }
+
+    initializeApp()
+})()

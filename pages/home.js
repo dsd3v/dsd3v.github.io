@@ -1,7 +1,9 @@
-import { generateHomeNavigationDiv } from '/navigation.js'
+import { useNavigation } from '/navigation.js'
 
 export class Home {
     render() {
+        const { generateHomeNavigationDiv } = useNavigation()
+
         const homeContainer = document.createElement('section')
         homeContainer.id = 'home-container'
 
