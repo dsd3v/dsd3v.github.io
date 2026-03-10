@@ -1,4 +1,4 @@
-import contactData from '../data/contact.json' with { type: 'json' }
+import contactData from '/data/contact.json' with { type: 'json' }
 
 export class Contact {
     render() {
