@@ -39,12 +39,15 @@ export const useNavigation = () => {
         new page().render()
     }
 
-    const navigate = ({ isFromPopState = false, isFromUrl = false, toRoute }) => {
-        let cleanedRouteString = toRoute
-        if (toRoute.length > 1 && toRoute[toRoute.length - 1] == '/') cleanedRouteString = toRoute.slice(0, toRoute.length - 1)
+    const getCleanedRoutePath = ({ routePath }) => {
+        let cleanedRoutePath = routePath
+        if (routePath.length > 1 && routePath[routePath.length - 1] == '/') cleanedRoutePath = routePath.slice(routePath(0, routePath.length - 1))
+        return cleanedRoutePath
+    }
 
+    const navigate = ({ isFromPopState = false, isFromUrl = false, toRoute }) => {
         removePreviousPage()
-        renderNewPage({ newPageRoute: cleanedRouteString, shouldUpdateUrl: (!isFromPopState && !isFromUrl) })
+        renderNewPage({ newPageRoute: getCleanedRoutePath({ toRoute }), shouldUpdateUrl: (!isFromPopState && !isFromUrl) })
     }
 
     const renderNavbar = () => {
@@ -67,6 +70,7 @@ export const useNavigation = () => {
             navbarLink.appendChild(document.createTextNode(title))
             navbarLink.addEventListener('click', event => {
                 event.preventDefault()
+                const currentRoute = getCleanedRoutePath({ routePath: window.location.pathname })
                 if (currentRoute !== route) navigate({ toRoute: route })
             })
 
