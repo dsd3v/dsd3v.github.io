@@ -203,22 +203,12 @@ nav {
 }
 
 #page-not-found-container {
-    & div {
-        font-size: 3rem;
-        margin-top: 200px;
-    }
-
     & span {
         font-size: 1.7rem;
         margin-top: 50px;
     }
 
     @media (max-width: 625px) {
-        & div {
-            font-size: 2.5rem;
-            margin-top: 200px;
-        }
-
         & span {
             font-size: 1.5rem;
             margin-top: 45px;
@@ -226,7 +216,20 @@ nav {
     }
 }
 
+#page-not-found-title {
+    animation: none;
+    font-size: 3rem;
+    margin-top: 200px;
+
+    @media (max-width: 625px) {
+        font-size: 2.5rem;
+        margin-top: 200px;
+
+    }
+}
+
 .page-title {
+    animation: none;
     font-size: 2.1rem;
     margin: 90px 0 50px 0;
 }

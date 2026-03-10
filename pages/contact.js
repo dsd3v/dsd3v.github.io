@@ -5,9 +5,9 @@ export class Contact {
         const contactContainer = document.createElement('section')
         contactContainer.className = 'page-container', contactContainer.id = 'contact-container'
 
-        const titleDiv = document.createElement('div')
-        titleDiv.className = 'page-title'
-        titleDiv.appendChild(document.createTextNode('Contact'))
+        const pageTitle = document.createElement('h1')
+        pageTitle.className = 'page-title'
+        pageTitle.appendChild(document.createTextNode('Contact'))
 
         const emailSpan = document.createElement('span')
         emailSpan.appendChild(document.createTextNode(`Email: ${contactData.email}`))
@@ -18,7 +18,7 @@ export class Contact {
         linkedInExternalLink.appendChild(document.createTextNode('LinkedIn ↗'))
         linkedInExternalLink.style.paddingTop = '25px'
 
-        contactContainer.appendChild(titleDiv)
+        contactContainer.appendChild(pageTitle)
         contactContainer.appendChild(emailSpan)
         contactContainer.appendChild(linkedInExternalLink)
 
