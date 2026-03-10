@@ -78,7 +78,7 @@ export class Navbar {
     }
 
     render() {
-        const currentRoute = window.location.pathname
+        const currentRoute = window.location.pathname.toLowerCase()
         const nav = document.createElement('nav')
 
         const homeNavbarLink = document.createElement('a')
