@@ -11,7 +11,6 @@ import { useNavigation } from '/navigation.js'
             if (redirectPath) {
                 sessionStorage.removeItem('redirectPath')
                 window.history.replaceState(null, null, redirectPath)
-                targetRoute = redirectPath
             }
 
             navigate({ isFromUrl: true, toRoute: window.location.pathname })
