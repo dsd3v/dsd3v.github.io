@@ -68,7 +68,7 @@ const renderNewPage = ({ newPageRoute, shouldUpdateUrl }) => {
     .getElementById('navbar-links-div')
     .classList.remove('navbar-links-menu-open');
 
-  if (shouldUpdateUrl) window.history.pushState({}, '', newPageRoute);
+  if (shouldUpdateUrl) window.history.pushState(null, null, newPageRoute);
 
   const newRouteConfig = routesToRouteConfigs[newPageRoute];
 
