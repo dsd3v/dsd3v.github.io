@@ -1,0 +1,33 @@
+{
+  "projects": {
+    "githubUrl": "https://github.com/dsd3v?tab=repositories"
+  },
+  "work-experience": [
+    {
+      "dates": "March 2026 - Present",
+      "description": "AI Engineering Apprentice at Flatiron School"
+    },
+    {
+      "dates": "July 2021 - December 2021, July 2022 - February 2023",
+      "description": "Software Engineer Co-Op → Software Engineer at HubSpot"
+    },
+    {
+      "dates": "March 2020 - July 2020",
+      "description": "Engineer at RetireUp"
+    }
+  ],
+  "education": [
+    {
+      "dates": "March 2026 - April 2027 (projected)",
+      "description": "AI Engineering Immersive (Experienced Developer Track)"
+    },
+    {
+      "dates": "August 2020 - May 2023",
+      "description": "B.S in Computer Science"
+    }
+  ],
+  "contact": {
+    "email": "david.sordia0@gmail.com",
+    "linkedInUrl": "https://linkedin.com/in/david-sordia-a555493a9"
+  }
+}
