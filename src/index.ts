@@ -1,11 +1,10 @@
-import { addNavbarLinksEventListener, navigate } from '@src/navigation';
+import { navigate } from '@src/navigation';
 import { renderNavbar } from '@src/render-funcs';
 
 (() => {
   const initializeApp = () => {
     document.addEventListener('DOMContentLoaded', () => {
       renderNavbar();
-      addNavbarLinksEventListener();
 
       const redirectPath = sessionStorage.getItem('redirectPath');
       if (redirectPath) {

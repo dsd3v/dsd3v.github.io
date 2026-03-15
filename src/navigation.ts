@@ -76,7 +76,7 @@ const renderNewPage = ({ newPageRoute, shouldUpdateUrl }) => {
   }
 };
 
-export const getCleanedRoutePath = ({ routePath }) => {
+const getCleanedRoutePath = ({ routePath }) => {
   let cleanedRoutePath = routePath;
   if (routePath.length > 1 && routePath.endsWith('/')) {
     cleanedRoutePath = routePath.slice(0, -1);
@@ -89,30 +89,14 @@ export const navigate = ({
   isFromUrl = false,
   toRoute,
 }) => {
-  removePreviousPage();
-  renderNewPage({
-    newPageRoute: getCleanedRoutePath({ routePath: toRoute }),
-    shouldUpdateUrl: !isFromPopState && !isFromUrl,
+  const currentRoute = getCleanedRoutePath({
+    routePath: window.location.pathname,
   });
-};
-
-export const addNavbarLinksEventListener = () => {
-  const navbarLinksDiv = document.getElementById('navbar-links-div');
-
-  navbarLinksDiv.addEventListener('click', (event) => {
-    event.preventDefault();
-
-    const target = event.target as HTMLElement;
-    const navbarLinkClicked = target.closest(
-      '.navbar-link'
-    ) as HTMLAnchorElement;
-
-    if (navbarLinkClicked) {
-      const currentRoute = getCleanedRoutePath({
-        routePath: window.location.pathname,
-      });
-      const toRoute = new URL(navbarLinkClicked.href).pathname;
-      if (currentRoute !== navbarLinkClicked.href) navigate({ toRoute });
-    }
-  });
+  if (currentRoute !== toRoute) {
+    removePreviousPage();
+    renderNewPage({
+      newPageRoute: getCleanedRoutePath({ routePath: toRoute }),
+      shouldUpdateUrl: !isFromPopState && !isFromUrl,
+    });
+  }
 };

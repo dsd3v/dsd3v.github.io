@@ -30,6 +30,20 @@ export const renderNavbar = () => {
       navbarLinksDiv.appendChild(navbarLink);
     });
 
+  navbarLinksDiv.addEventListener('click', (event) => {
+    event.preventDefault();
+    const target = event.target as HTMLElement;
+
+    const navbarLinkClicked = target.closest(
+      '.navbar-link'
+    ) as HTMLAnchorElement;
+
+    if (navbarLinkClicked) {
+      const toRoute = new URL(navbarLinkClicked.href).pathname;
+      navigate({ toRoute });
+    }
+  });
+
   const navbarToggle = document.createElement('div');
   navbarToggle.id = 'navbar-toggle';
 
@@ -85,6 +99,7 @@ export const renderHomePage = () => {
       homeNavigationLink.className = 'home-navigation-link';
       homeNavigationLink.href = route;
       homeNavigationLink.appendChild(document.createTextNode(title));
+
       homeNavigationLink.addEventListener('click', (event) => {
         event.preventDefault();
         navigate({ toRoute: route });
