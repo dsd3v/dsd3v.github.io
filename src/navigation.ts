@@ -92,7 +92,8 @@ export const navigate = ({
   const currentRoute = getCleanedRoutePath({
     routePath: window.location.pathname,
   });
-  if (!isFromUrl && currentRoute !== toRoute) {
+  const shouldUpdate = isFromUrl || isFromPopState || currentRoute !== toRoute;
+  if (shouldUpdate) {
     removePreviousPage();
     renderNewPage({
       newPageRoute: getCleanedRoutePath({ routePath: toRoute }),

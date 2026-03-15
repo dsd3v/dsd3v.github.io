@@ -46,6 +46,7 @@ export const renderNavbar = () => {
 
   const navbarToggle = document.createElement('div');
   navbarToggle.id = 'navbar-toggle';
+  navbarToggle.setAttribute('aria-label', 'Navigation Links Menu Toggle');
 
   const hamburger = document.createElement('div');
   hamburger.id = 'hamburger';
