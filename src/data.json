@@ -2,30 +2,9 @@
   "projects": {
     "githubUrl": "https://github.com/dsd3v?tab=repositories"
   },
-  "work-experience": [
-    {
-      "dates": "March 2026 - Present",
-      "description": "AI Engineering Apprentice at Flatiron School"
-    },
-    {
-      "dates": "July 2021 - December 2021, July 2022 - February 2023",
-      "description": "Software Engineer Co-Op → Software Engineer at HubSpot"
-    },
-    {
-      "dates": "March 2020 - July 2020",
-      "description": "Engineer at RetireUp"
-    }
-  ],
-  "education": [
-    {
-      "dates": "March 2026 - April 2027 (projected)",
-      "description": "AI Engineering Immersive (Experienced Developer Track)"
-    },
-    {
-      "dates": "August 2020 - May 2023",
-      "description": "B.S in Computer Science"
-    }
-  ],
+  "about": {
+    "text_html": "~6 years of full-stack development experience specializing in front-end development with React paired with Node, Java, and/or Python back-ends and MySQL, MongoDB, and/or Neo4j databases. \n\n I am currently gaining extensive experience in AI-integrated Software Engineering & Data Science as a Work-Study Apprentice at Flatiron School working on AI-powered EdTech tools with NextJS, Node, PostgreSQL / Supabase, and Python / FastAPI, with a projected graduation in April 2027."
+  },
   "contact": {
     "email": "david.sordia0@gmail.com",
     "linkedInUrl": "https://linkedin.com/in/david-sordia-a555493a9"

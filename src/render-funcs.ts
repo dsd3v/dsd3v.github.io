@@ -1,9 +1,5 @@
 import pagesContentData from '@src/data.json';
-import {
-  getCleanedRoutePath,
-  navigate,
-  routesToRouteConfigs,
-} from '@src/navigation';
+import { navigate, routesToRouteConfigs } from '@src/navigation';
 
 export const renderNavbar = () => {
   const nav = document.createElement('nav');
@@ -14,7 +10,6 @@ export const renderNavbar = () => {
   homeNavbarLink.appendChild(
     document.createTextNode(routesToRouteConfigs['/'].title)
   );
-
   homeNavbarLink.addEventListener('click', (event) => {
     event.preventDefault();
     navigate({ toRoute: '/' });
@@ -30,17 +25,7 @@ export const renderNavbar = () => {
       navbarLink.classList.add('navbar-link');
       navbarLink.href = route;
       navbarLink.id = `${id}-navbar-link`;
-
       navbarLink.appendChild(document.createTextNode(title));
-
-      navbarLink.addEventListener('click', (event) => {
-        event.preventDefault();
-
-        const currentRoute = getCleanedRoutePath({
-          routePath: window.location.pathname,
-        });
-        if (currentRoute !== route) navigate({ toRoute: route });
-      });
 
       navbarLinksDiv.appendChild(navbarLink);
     });
@@ -100,7 +85,6 @@ export const renderHomePage = () => {
       homeNavigationLink.className = 'home-navigation-link';
       homeNavigationLink.href = route;
       homeNavigationLink.appendChild(document.createTextNode(title));
-
       homeNavigationLink.addEventListener('click', (event) => {
         event.preventDefault();
         navigate({ toRoute: route });
@@ -132,7 +116,7 @@ export const renderProjectsPage = () => {
   githubExternalLink.href = githubUrl;
   githubExternalLink.rel = 'noopener noreferrer';
   githubExternalLink.target = '_blank';
-  githubExternalLink.appendChild(document.createTextNode('GitHub ↗'));
+  githubExternalLink.appendChild(document.createTextNode('View on GitHub ↗'));
 
   projectsContainer.appendChild(pageTitle);
   projectsContainer.appendChild(githubExternalLink);
@@ -140,69 +124,24 @@ export const renderProjectsPage = () => {
   document.body.appendChild(projectsContainer);
 };
 
-export const renderWorkExperiencePage = () => {
-  const workExperiences = pagesContentData['work-experience'];
+export const renderAboutPage = () => {
+  const { text_html } = pagesContentData['about'];
 
-  const workExperienceContainer = document.createElement('section');
-  workExperienceContainer.className = 'page-container';
-  workExperienceContainer.id = 'work-experience-container';
-
-  const pageTitle = document.createElement('h1');
-  pageTitle.className = 'page-title';
-  pageTitle.appendChild(document.createTextNode('Work Experience'));
-
-  const ul = document.createElement('ul');
-
-  workExperiences.forEach((workExperience) => {
-    const li = document.createElement('li');
-
-    const divider = document.createElement('span');
-    divider.className = 'divider';
-    divider.appendChild(document.createTextNode('/'));
-
-    li.appendChild(document.createTextNode(workExperience.description));
-    li.appendChild(divider);
-    li.appendChild(document.createTextNode(workExperience.dates));
-
-    ul.appendChild(li);
-  });
-
-  workExperienceContainer.appendChild(pageTitle);
-  workExperienceContainer.appendChild(ul);
-
-  document.body.appendChild(workExperienceContainer);
-};
-
-export const renderEducationPage = () => {
-  const educations = pagesContentData.education;
-
-  const educationContainer = document.createElement('section');
-  educationContainer.className = 'page-container';
-  educationContainer.id = 'education-container';
+  const aboutContainer = document.createElement('section');
+  aboutContainer.className = 'page-container';
+  aboutContainer.id = 'about-container';
 
   const pageTitle = document.createElement('h1');
   pageTitle.className = 'page-title';
-  pageTitle.appendChild(document.createTextNode('Education'));
+  pageTitle.appendChild(document.createTextNode('About'));
 
-  const ul = document.createElement('ul');
-  educations.forEach((education) => {
-    const li = document.createElement('li');
+  const textDiv = document.createElement('div');
+  textDiv.textContent = text_html;
 
-    const divider = document.createElement('span');
-    divider.className = 'divider';
-    divider.appendChild(document.createTextNode('/'));
+  aboutContainer.appendChild(pageTitle);
+  aboutContainer.appendChild(textDiv);
 
-    li.appendChild(document.createTextNode(education.description));
-    li.appendChild(divider);
-    li.appendChild(document.createTextNode(education.dates));
-
-    ul.appendChild(li);
-  });
-
-  educationContainer.appendChild(pageTitle);
-  educationContainer.appendChild(ul);
-
-  document.body.appendChild(educationContainer);
+  document.body.appendChild(aboutContainer);
 };
 
 export const renderContactPage = () => {

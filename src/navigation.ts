@@ -1,8 +1,7 @@
 import {
   renderHomePage,
   renderProjectsPage,
-  renderWorkExperiencePage,
-  renderEducationPage,
+  renderAboutPage,
   renderContactPage,
   renderPageNotFound,
 } from '@src/render-funcs';
@@ -18,15 +17,10 @@ export const routesToRouteConfigs = {
     renderPageFunc: renderProjectsPage,
     title: 'Projects',
   },
-  '/work-experience': {
-    id: 'work-experience',
-    renderPageFunc: renderWorkExperiencePage,
-    title: 'Work Experience',
-  },
-  '/education': {
-    id: 'education',
-    renderPageFunc: renderEducationPage,
-    title: 'Education',
+  '/about': {
+    id: 'about',
+    renderPageFunc: renderAboutPage,
+    title: 'About',
   },
   '/contact': {
     id: 'contact',
@@ -99,5 +93,26 @@ export const navigate = ({
   renderNewPage({
     newPageRoute: getCleanedRoutePath({ routePath: toRoute }),
     shouldUpdateUrl: !isFromPopState && !isFromUrl,
+  });
+};
+
+export const addNavbarLinksEventListener = () => {
+  const navbarLinksDiv = document.getElementById('navbar-links-div');
+
+  navbarLinksDiv.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    const target = event.target as HTMLElement;
+    const navbarLinkClicked = target.closest(
+      '.navbar-link'
+    ) as HTMLAnchorElement;
+
+    if (navbarLinkClicked) {
+      const currentRoute = getCleanedRoutePath({
+        routePath: window.location.pathname,
+      });
+      const toRoute = new URL(navbarLinkClicked.href).pathname;
+      if (currentRoute !== navbarLinkClicked.href) navigate({ toRoute });
+    }
   });
 };
