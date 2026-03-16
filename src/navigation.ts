@@ -6,7 +6,7 @@ import {
   renderPageNotFound,
 } from '@src/render-funcs';
 
-export const routesToRouteConfigs = {
+export const routesToRouteConfigs = Object.freeze({
   '/': {
     id: 'home',
     renderPageFunc: renderHomePage,
@@ -27,7 +27,7 @@ export const routesToRouteConfigs = {
     renderPageFunc: renderContactPage,
     title: 'Contact',
   },
-};
+});
 
 const removePreviousPage = () => {
   const prevPageNavbarLink = document.getElementsByClassName(
