@@ -274,62 +274,122 @@
 
   <body>
     <script>
-      const appData = {
-        projects: {
-          githubUrl: "https://github.com/dsd3v?tab=repositories",
+      const appRoutesToConfigs = {
+        "/": {
+          id: "home",
+          renderPageFunc: null,
+          title: "Home",
         },
-        about: {
-          text_html:
-            "~6 years of full-stack development experience specializing in front-end development with ReactJS paired with NodeJS and/or Java REST API back-ends and MySQL, MongoDB, and/or Neo4j databases. \n\n Currently, I am gaining experience with AI-integrated Software Engineering & Data Science as a Work-Study Apprentice at Flatiron School, where I am contributing to the development of AI-powered EdTech tools with NextJS, NodeJS, Python / FastAPI, and PostgreSQL / Supabase while simultaneously completing AI, Data Science, and Machine Learning-related coursework, with a projected graduation in April 2027.",
+        "/home": {
+          id: "home",
+          renderPageFunc: () => {
+            window.location.href = "/";
+          },
+          title: "Home",
         },
-        contact: {
-          email: "david.sordia0@gmail.com",
-          linkedInUrl: "https://linkedin.com/in/david-sordia-a555493a9",
+        "/projects": {
+          id: "projects",
+          renderPageFunc: () => {
+            const projectsContainer = document.createElement("section");
+            projectsContainer.className = "page-container";
+            projectsContainer.id = "projects-container";
+
+            const pageTitle = document.createElement("h1");
+            pageTitle.className = "page-title";
+            pageTitle.appendChild(document.createTextNode("Projects"));
+
+            const githubExternalLink = document.createElement("a");
+            githubExternalLink.className = "external-link";
+            githubExternalLink.href =
+              "https://github.com/dsd3v?tab=repositories";
+            githubExternalLink.rel = "noopener noreferrer";
+            githubExternalLink.target = "_blank";
+            githubExternalLink.appendChild(
+              document.createTextNode("View on GitHub ↗"),
+            );
+
+            projectsContainer.appendChild(pageTitle);
+            projectsContainer.appendChild(githubExternalLink);
+
+            document.body.appendChild(projectsContainer);
+          },
+          title: "Projects",
+        },
+        "/about": {
+          id: "about",
+          renderPageFunc: () => {
+            const aboutContainer = document.createElement("section");
+            aboutContainer.className = "page-container";
+            aboutContainer.id = "about-container";
+
+            const pageTitle = document.createElement("h1");
+            pageTitle.className = "page-title";
+            pageTitle.appendChild(document.createTextNode("About"));
+
+            const textDiv = document.createElement("div");
+            textDiv.textContent =
+              "~6 years of full-stack development experience specializing in front-end development with ReactJS paired with NodeJS and/or Java REST API back-ends and MySQL, MongoDB, and/or Neo4j databases. \n\n Currently, I am gaining experience with AI-integrated Software Engineering & Data Science as a Work-Study Apprentice at Flatiron School, where I am contributing to the development of AI-powered EdTech tools with NextJS, NodeJS, Python / FastAPI, and PostgreSQL / Supabase while simultaneously completing AI, Data Science, and Machine Learning-related coursework, with a projected graduation in April 2027.";
+
+            aboutContainer.appendChild(pageTitle);
+            aboutContainer.appendChild(textDiv);
+
+            document.body.appendChild(aboutContainer);
+          },
+          title: "About",
+        },
+        "/contact": {
+          id: "contact",
+          renderPageFunc: () => {
+            const contactContainer = document.createElement("section");
+            contactContainer.className = "page-container";
+            contactContainer.id = "contact-container";
+
+            const pageTitle = document.createElement("h1");
+            pageTitle.className = "page-title";
+            pageTitle.appendChild(document.createTextNode("Contact"));
+
+            const emailSpan = document.createElement("span");
+            emailSpan.appendChild(
+              document.createTextNode("Email: david.sordia0@gmail.com"),
+            );
+
+            const linkedInExternalLink = document.createElement("a");
+            linkedInExternalLink.className = "external-link";
+            linkedInExternalLink.href =
+              "https://linkedin.com/in/david-sordia-a555493a9";
+            linkedInExternalLink.rel = "noopener noreferrer";
+            linkedInExternalLink.target = "_blank";
+            linkedInExternalLink.appendChild(
+              document.createTextNode("LinkedIn ↗"),
+            );
+            linkedInExternalLink.style.paddingTop = "25px";
+
+            contactContainer.appendChild(pageTitle);
+            contactContainer.appendChild(emailSpan);
+            contactContainer.appendChild(linkedInExternalLink);
+
+            document.body.appendChild(contactContainer);
+          },
+          title: "Contact",
         },
       };
 
-      const appPages = [
-        {
-          id: "home",
-          renderPageFunc: null,
-          route: "/",
-          title: "Home",
-        },
-        {
-          id: "projects",
-          renderPageFunc: null,
-          route: "/projects",
-          title: "Projects",
-        },
-        {
-          id: "about",
-          renderPageFunc: null,
-          route: "/about",
-          title: "About",
-        },
-        {
-          id: "contact",
-          renderPageFunc: null,
-          route: "/contact",
-          title: "Contact",
-        },
-      ];
+      appRoutesToConfigs["/"].renderPageFunc = () => {
+        const homeContainer = document.createElement("section");
+        homeContainer.id = "home-container";
 
-      const renderPageFunctions = [
-        () => {
-          const homeContainer = document.createElement("section");
-          homeContainer.id = "home-container";
+        const h1 = document.createElement("h1");
+        h1.appendChild(document.createTextNode("David Sordia"));
 
-          const h1 = document.createElement("h1");
-          h1.appendChild(document.createTextNode("David Sordia"));
+        const h2 = document.createElement("h2");
+        h2.appendChild(document.createTextNode("AI Engineering Apprentice"));
 
-          const h2 = document.createElement("h2");
-          h2.appendChild(document.createTextNode("AI Engineering Apprentice"));
+        const homeNavigationDiv = document.createElement("div");
+        homeNavigationDiv.id = "home-navigation-div";
 
-          const homeNavigationDiv = document.createElement("div");
-          homeNavigationDiv.id = "home-navigation-div";
-
-          appPages.slice(1).forEach(({ route, title }) => {
+        Object.entries(appRoutesToConfigs)
+          .slice(2)
+          .forEach(([route, { title }]) => {
             const homeNavigationLink = document.createElement("a");
             homeNavigationLink.className = "home-navigation-link";
             homeNavigationLink.href = route;
@@ -343,92 +403,12 @@
             homeNavigationDiv.appendChild(homeNavigationLink);
           });
 
-          homeContainer.appendChild(h1);
-          homeContainer.appendChild(h2);
-          homeContainer.appendChild(homeNavigationDiv);
+        homeContainer.appendChild(h1);
+        homeContainer.appendChild(h2);
+        homeContainer.appendChild(homeNavigationDiv);
 
-          document.body.appendChild(homeContainer);
-        },
-        () => {
-          const { githubUrl } = appData.projects;
-
-          const projectsContainer = document.createElement("section");
-          projectsContainer.className = "page-container";
-          projectsContainer.id = "projects-container";
-
-          const pageTitle = document.createElement("h1");
-          pageTitle.className = "page-title";
-          pageTitle.appendChild(document.createTextNode("Projects"));
-
-          const githubExternalLink = document.createElement("a");
-          githubExternalLink.className = "external-link";
-          githubExternalLink.href = githubUrl;
-          githubExternalLink.rel = "noopener noreferrer";
-          githubExternalLink.target = "_blank";
-          githubExternalLink.appendChild(
-            document.createTextNode("View on GitHub ↗"),
-          );
-
-          projectsContainer.appendChild(pageTitle);
-          projectsContainer.appendChild(githubExternalLink);
-
-          document.body.appendChild(projectsContainer);
-        },
-
-        () => {
-          const { text_html } = appData.about;
-
-          const aboutContainer = document.createElement("section");
-          aboutContainer.className = "page-container";
-          aboutContainer.id = "about-container";
-
-          const pageTitle = document.createElement("h1");
-          pageTitle.className = "page-title";
-          pageTitle.appendChild(document.createTextNode("About"));
-
-          const textDiv = document.createElement("div");
-          textDiv.textContent = text_html;
-
-          aboutContainer.appendChild(pageTitle);
-          aboutContainer.appendChild(textDiv);
-
-          document.body.appendChild(aboutContainer);
-        },
-        () => {
-          const { email, linkedInUrl } = appData.contact;
-
-          const contactContainer = document.createElement("section");
-          contactContainer.className = "page-container";
-          contactContainer.id = "contact-container";
-
-          const pageTitle = document.createElement("h1");
-          pageTitle.className = "page-title";
-          pageTitle.appendChild(document.createTextNode("Contact"));
-
-          const emailSpan = document.createElement("span");
-          emailSpan.appendChild(document.createTextNode(`Email: ${email}`));
-
-          const linkedInExternalLink = document.createElement("a");
-          linkedInExternalLink.className = "external-link";
-          linkedInExternalLink.href = linkedInUrl;
-          linkedInExternalLink.rel = "noopener noreferrer";
-          linkedInExternalLink.target = "_blank";
-          linkedInExternalLink.appendChild(
-            document.createTextNode("LinkedIn ↗"),
-          );
-          linkedInExternalLink.style.paddingTop = "25px";
-
-          contactContainer.appendChild(pageTitle);
-          contactContainer.appendChild(emailSpan);
-          contactContainer.appendChild(linkedInExternalLink);
-
-          document.body.appendChild(contactContainer);
-        },
-      ];
-
-      for (let i = 0; i < appPages.length; i++) {
-        appPages[i].renderPageFunc = renderPageFunctions[i];
-      }
+        document.body.appendChild(homeContainer);
+      };
 
       const renderNavbar = () => {
         const nav = document.createElement("nav");
@@ -436,7 +416,9 @@
         const homeNavbarLink = document.createElement("a");
         homeNavbarLink.id = "home-navbar-link";
         homeNavbarLink.href = "/";
-        homeNavbarLink.appendChild(document.createTextNode(appPages[0].title));
+        homeNavbarLink.appendChild(
+          document.createTextNode(appRoutesToConfigs["/"].title),
+        );
         homeNavbarLink.addEventListener("click", (event) => {
           event.preventDefault();
           navigate({ toRoute: "/" });
@@ -445,15 +427,17 @@
         const navbarLinksDiv = document.createElement("div");
         navbarLinksDiv.id = "navbar-links-div";
 
-        appPages.slice(1).forEach(({ id, route, title }) => {
-          const navbarLink = document.createElement("a");
-          navbarLink.classList.add("navbar-link");
-          navbarLink.href = route;
-          navbarLink.id = `${id}-navbar-link`;
-          navbarLink.appendChild(document.createTextNode(title));
+        Object.entries(appRoutesToConfigs)
+          .slice(2)
+          .forEach(([route, { id, title }]) => {
+            const navbarLink = document.createElement("a");
+            navbarLink.classList.add("navbar-link");
+            navbarLink.href = route;
+            navbarLink.id = `${id}-navbar-link`;
+            navbarLink.appendChild(document.createTextNode(title));
 
-          navbarLinksDiv.appendChild(navbarLink);
-        });
+            navbarLinksDiv.appendChild(navbarLink);
+          });
 
         navbarLinksDiv.addEventListener("click", (event) => {
           event.preventDefault();
@@ -525,14 +509,6 @@
         document.body.appendChild(pageNotFoundContainer);
       };
 
-      const routesToRouteConfigs = appPages.reduce((acc, current) => {
-        acc[current.route] = {
-          id: current.id,
-          renderPageFunc: current.renderPageFunc,
-        };
-        return acc;
-      }, {});
-
       const removePreviousPage = () => {
         const prevPageNavbarLink =
           document.getElementsByClassName("active-navbar-link")[0];
@@ -541,7 +517,7 @@
           prevPageNavbarLink.classList.remove("active-navbar-link");
 
           const prevRoute = new URL(prevPageNavbarLink.href).pathname;
-          const prevRouteConfig = routesToRouteConfigs[prevRoute];
+          const prevRouteConfig = appRoutesToConfigs[prevRoute];
 
           if (prevRouteConfig) {
             const prevPageContainer = document.getElementById(
@@ -567,7 +543,7 @@
 
         if (shouldUpdateUrl) window.history.pushState(null, null, newPageRoute);
 
-        const newRouteConfig = routesToRouteConfigs[newPageRoute];
+        const newRouteConfig = appRoutesToConfigs[newPageRoute];
 
         if (newRouteConfig) {
           document
