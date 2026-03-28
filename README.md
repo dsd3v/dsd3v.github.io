@@ -2,9 +2,10 @@
 
 ### Technologies Used:
 
-- HTML w/ inline CSS & JavaScript
-- Hosted on GitHub Pages
+- HTML w/ inline CSS & JavaScript.
+- Hosted on GitHub Pages.
 
 ### Features:
 
-- Client-side routing: deep linking, a "not found" page for invalid routes, and non-hashed routes
+- Mobile-friendly & Responsive design.
+- Client-side routing: deep linking, a "not found" page for invalid routes, and non-hashed routes.
