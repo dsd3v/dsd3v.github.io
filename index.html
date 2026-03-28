@@ -266,7 +266,6 @@
 
         & #arrow {
           color: rgba(0, 0, 0, 0.9);
-
           transform: translateY(-3px) rotate(180deg);
         }
       }
@@ -292,31 +291,31 @@
       const appPages = [
         {
           id: "home",
-          render_func: null,
+          renderPageFunc: null,
           route: "/",
           title: "Home",
         },
         {
           id: "projects",
-          render_func: null,
+          renderPageFunc: null,
           route: "/projects",
           title: "Projects",
         },
         {
           id: "about",
-          render_func: null,
+          renderPageFunc: null,
           route: "/about",
           title: "About",
         },
         {
           id: "contact",
-          render_func: null,
+          renderPageFunc: null,
           route: "/contact",
           title: "Contact",
         },
       ];
 
-      const render_functions = [
+      const renderPageFunctions = [
         () => {
           const homeContainer = document.createElement("section");
           homeContainer.id = "home-container";
@@ -428,7 +427,7 @@
       ];
 
       for (let i = 0; i < appPages.length; i++) {
-        appPages[i].render_func = render_functions[i];
+        appPages[i].renderPageFunc = renderPageFunctions[i];
       }
 
       const renderNavbar = () => {
@@ -529,7 +528,7 @@
       const routesToRouteConfigs = appPages.reduce((acc, current) => {
         acc[current.route] = {
           id: current.id,
-          renderPageFunc: current.render_func,
+          renderPageFunc: current.renderPageFunc,
         };
         return acc;
       }, {});
