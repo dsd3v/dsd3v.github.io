@@ -2,10 +2,7 @@
 
 ### Technologies Used:
 
-- HTML / CSS / TypeScript
-- JSON data storage
-- ESBuild (TypeScript -> Minified JavaScript)
-- Prettier (Code syntax formatting / styling)
+- HTML w/ inline CSS & JavaScript
 - Hosted on GitHub Pages
 
 ### Features:
