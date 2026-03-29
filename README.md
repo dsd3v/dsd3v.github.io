@@ -2,7 +2,7 @@
 
 ### Technologies Used:
 
-- HTML w/ inline CSS & JavaScript.
+- Minified HTML w/ inline CSS & JavaScript.
 - Hosted on GitHub Pages.
 
 ### Features:
